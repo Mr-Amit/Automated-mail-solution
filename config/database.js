@@ -9,7 +9,7 @@ mongoose.set('autoIndex', false);
 
 const connectDB = () => {
   try {
-    const connection = mongoose.connect(process.env.MONGO_URI,  {
+    const connection = mongoose.connect(process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true
     });
@@ -18,7 +18,7 @@ const connectDB = () => {
     return connection;
 
   } catch (err) {
-      console.error(err);
+    console.error(err);
   }
 }
 

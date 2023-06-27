@@ -13,12 +13,11 @@ module.exports = function (passport) {
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: '/auth/google/callback',
         accessType: 'offline',
-				passReqToCallback: true
+        passReqToCallback: true
       },
       async (req, accessToken, refreshToken, profile, done) => {
-        //get the user data from google 
         // console.log({ accessToken, refreshToken });
-        
+
         try {
           const newUser = {
             googleId: profile.id,
@@ -34,11 +33,9 @@ module.exports = function (passport) {
           let user = await User.findOne({ googleId: profile.id })
 
           if (user) {
-            //If user present in our database.
-            await User.updateOne({ _id: user._id }, { $set: { accessToken }})
+            await User.updateOne({ _id: user._id }, { $set: { accessToken } })
             done(null, user)
           } else {
-            // if user is not preset in our database save user data to database.
             user = await User.create(newUser)
             done(null, user)
           }
@@ -57,7 +54,7 @@ module.exports = function (passport) {
   // used to deserialize the user
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
-			done(err, user);
-		});
+      done(err, user);
+    });
   })
 }
