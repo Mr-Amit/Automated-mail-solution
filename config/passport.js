@@ -17,6 +17,7 @@ module.exports = function (passport) {
       },
       async (req, accessToken, refreshToken, profile, done) => {
         // console.log({ accessToken, refreshToken });
+        // console.log('always');
 
         try {
           const newUser = {
@@ -46,12 +47,10 @@ module.exports = function (passport) {
     )
   )
 
-  // used to serialize the user for the session
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
 
-  // used to deserialize the user
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
       done(err, user);

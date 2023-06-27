@@ -3,24 +3,6 @@ const EmailService = require('./EmailService');
 const myCache = require('../lib/cache-store')
 
 
-
-async function deleteUserSession(user, sessionId) {
-	await myCache.del(user.email)
-	return new Promise(async (resolve, reject) => {
-		setTimeout(async () => {
-			const db = mongoose.connection.db;
-			const result = await db.collection('sessions').deleteOne({ '_id': sessionId });
-			console.log(result.result);
-			if (result.result.ok == 1) {
-				resolve(true);
-			} else {
-				resolve(false);
-			}
-		}, 1000)
-	})
-}
-
-
 async function initateEmailProcessing(user) {
 	const emailService = new EmailService(user);
 	let labelId = await emailService.createLabelIfDoesNotExist();
@@ -68,7 +50,7 @@ async function initateEmailProcessing(user) {
 	let isUserLoggedIn = await myCache.get(user.email);
 	if (isUserLoggedIn) {
 		let interval = Math.floor(Math.random() * (120 - 45 + 1)) + 45;
-		interval = 2;
+		// interval = 2;
 		setTimeout(function () {
 			initateEmailProcessing(user)
 		}, interval * 1000);
@@ -79,7 +61,5 @@ async function initateEmailProcessing(user) {
 
 
 module.exports = {
-	deleteUserSession: deleteUserSession,
 	initateEmailProcessing: initateEmailProcessing
-
 };

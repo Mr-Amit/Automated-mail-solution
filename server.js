@@ -41,8 +41,3 @@ app.listen(PORT, () => {
 })
 
 
-// UserService.initateEmailProcessing({
-//   email: 'akchava1990@gmail.com',
-//   accessToken: 'ya29.a0AWY7Cklj7lne3sa14n9a5ZyUrqmS5unkrtVgtP1uRrXGCCWsMsKSAeXbf0LwSfGdyRjXgpSzkwqg_4qxbAJChjQ_9lVDiVdmcRk-BjR4QWXhOZJ34acfhjI9pXV9-c45FRijJenzU_07iUoh8nkGOcRSfg7LaCgYKAV8SARESFQG1tDrpI6jUeQoVbzEcsPHaFOcbDQ0163'
-// })
-
